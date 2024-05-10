@@ -30,21 +30,21 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item" :class="{ 'active': isComponentActive }">
       <a class="nav-link collapsed d-flex justify-content-between align-items-center" @click="toggleComponentCollapse" :aria-expanded="isComponentCollapseExpanded.toString()" aria-controls="collapseTwo">
-        <span>Components</span>
+        <span>Videos</span>
         <i class="fas fa-chevron-right fa-sm ml-2" :class="{ 'rotate-icon': isComponentCollapseExpanded }"></i>
       </a>
       <div class="collapse" :class="{ 'show': isComponentCollapseExpanded }" id="collapseTwo" aria-labelledby="headingTwo"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Components:</h6>
-          <router-link to="/buttons" class="collapse-item">Buttons</router-link>
-          <router-link to="/cards" class="collapse-item">Cards</router-link>
+          <h6 class="collapse-header">Vidoes Section:</h6>
+          <router-link to="/admin-panel/add-videos" class="collapse-item">Add Videos</router-link>
+          <router-link to="/admin-panel/videos-list" class="collapse-item">Videos List</router-link>
         </div>
       </div>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item" :class="{ 'active': isUtilitiesActive }">
+    <!-- <li class="nav-item" :class="{ 'active': isUtilitiesActive }">
       <a class="nav-link collapsed d-flex justify-content-between align-items-center" @click="toggleUtilitiesCollapse" :aria-expanded="isUtilitiesCollapseExpanded.toString()" aria-controls="collapseUtilities">
         <span>Utilities</span>
         <i class="fas fa-chevron-right fa-sm ml-2" :class="{ 'rotate-icon': isUtilitiesCollapseExpanded }"></i>
@@ -59,7 +59,7 @@
           <router-link to="/utilities-other" class="collapse-item">Other</router-link>
         </div>
       </div>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -78,30 +78,33 @@
       <div class="collapse" :class="{ 'show': isPagesCollapseExpanded }" id="collapsePages" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-          <router-link to="/admin-panel/user-setting" class="collapse-item">Users List</router-link>
-          <router-link to="/admin-panel/login" class="collapse-item">Login</router-link>
-          <router-link to="/forgot-password" class="collapse-item">Forgot Password</router-link>
+          <router-link to="/admin-panel/add-user" class="collapse-item">Add Users</router-link>
+
+          <router-link to="/admin-panel/user-setting" class="collapse-item">User Setting</router-link>
+
+          <router-link to="/admin-panel/user-list" class="collapse-item">User List</router-link>
+          <!-- <router-link to="/forgot-password" class="collapse-item">Forgot Password</router-link>
           <div class="collapse-divider"></div>
           <h6 class="collapse-header">Other Pages:</h6>
           <router-link to="/404" class="collapse-item">404 Page</router-link>
-          <router-link to="/blank" class="collapse-item">Blank Page</router-link>
+          <router-link to="/blank" class="collapse-item">Blank Page</router-link> -->
         </div>
       </div>
     </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-      <router-link to="/charts" class="nav-link">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span>
+      <router-link to="/admin-panel/search" class="nav-link">
+        <i class="fas fa-fw fa-search"></i>
+        <span>Search</span>
       </router-link>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
       <router-link to="/tables" class="nav-link">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span>
+        <i class="fas fa-fw fa-sign-out-alt"></i>
+        <span>Log-Out</span>
       </router-link>
     </li>
 
@@ -151,3 +154,4 @@ methods: {
 }
 };
 </script>
+

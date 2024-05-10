@@ -29,7 +29,7 @@
 <script>
 import TopNavbar from './topNavbar.vue';
 import RightNavbar from './rightNavbar.vue';
-
+// import '.../css/AdminPanel.css';
 export default {
     components: {
     TopNavbar, 
@@ -43,4 +43,3 @@ export default {
   
 };
 </script>
-<style src=".../../resources/css/Adminpanel.css" ></style>

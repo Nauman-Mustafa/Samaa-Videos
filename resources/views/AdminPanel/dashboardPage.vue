@@ -165,3 +165,4 @@
 
 
 </template>
+<style src=".../../resources/css/Adminpanel.css"  ></style>

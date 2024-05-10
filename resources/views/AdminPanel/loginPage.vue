@@ -69,7 +69,5 @@
   };
   </script>
   
-  <style>
-  /* Add any custom styles here */
-  </style>
-  
+
+  <style src=".../../resources/css/Adminpanel.css"  scoped></style>
