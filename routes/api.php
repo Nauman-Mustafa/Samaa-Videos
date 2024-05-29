@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +15,27 @@ use App\Http\Controllers\UserController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('users')->group(function () {
+        Route::post('/', [UserController::class, 'store']);
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/{user}', [UserController::class, 'show']);
+        Route::put('/{user}', [UserController::class, 'update']);
+        Route::delete('/{user}', [UserController::class, 'destroy']);
+    });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::prefix('users')->group(function () {
-    Route::post('/', [\App\Http\Controllers\UserController::class, 'store']);
-    Route::get('/', [\App\Http\Controllers\UserController::class, 'index']);
-    Route::get('/{user}', [\App\Http\Controllers\UserController::class, 'show']);
-    Route::put('/{user}', [\App\Http\Controllers\UserController::class, 'update']);
-    Route::delete('/{user}', [\App\Http\Controllers\UserController::class, 'destroy']);
+    Route::get('/user-statistics', [UserController::class, 'getUserStatistics']);
+
+    Route::prefix('categories')->group(function () {
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::get('/{category}', [CategoryController::class, 'show']);
+        Route::put('/{category}', [CategoryController::class, 'update']);
+        Route::delete('/{category}', [CategoryController::class, 'destroy']);
+    });
+
+    Route::get('/category-statistics', [CategoryController::class, 'getCategoryStatistics']);
 });
 
-Route::get('/user-statistics', [UserController::class, 'getUserStatistics']);
+// Public routes
+Route::post('/login', [UserController::class, 'login']);

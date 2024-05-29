@@ -1,22 +1,22 @@
 <template>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"> User List</h1>
-        <router-link to='/admin-panel/add-user' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-upload fa-sm text-white-50"></i> Add User
+        <h1 class="h3 mb-0 text-gray-800"> Category List</h1>
+        <router-link to="/admin-panel/add-category" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-upload fa-sm text-white-50"></i> Add Category
         </router-link>
     </div>
     
     <!-- Content Row -->
     <div class="row">
-        <!-- Total Users Card -->
+        <!-- Total Categories Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ userStatistics.total_users }}</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ categoryStatistics.total_categories }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -26,14 +26,14 @@
             </div>
         </div>
     
-        <!-- Active Users Card -->
+        <!-- Active Categories Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Active Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ userStatistics.active_users }}</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Active Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ categoryStatistics.active_categories }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -43,14 +43,14 @@
             </div>
         </div>
     
-        <!-- Deleted Users Card -->
+        <!-- Deleted Categories Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Deleted Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ userStatistics.deleted_users }}</div>
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Deleted Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ categoryStatistics.deleted_categories }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -60,14 +60,14 @@
             </div>
         </div>
     
-        <!-- Blocked Users Card -->
+        <!-- Parent Categories Card -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Blocked Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ userStatistics.blocked_users }}</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Parent Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ categoryStatistics.parent_categories }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -92,15 +92,14 @@
             </form>
         </div>
     </div>
-    
     <!-- Content Row -->
     <div class="row">
-        <!-- Users Table -->
+        <!-- Categories Table -->
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <!-- Card Header -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Users Table</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Categories Table</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -120,19 +119,18 @@
                         <ProgressBar mode="indeterminate" style="height: 6px"></ProgressBar>
                     </div>
                     <div v-else-if="error" class="alert alert-danger">
-                        Error fetching users: {{ error }}
+                        Error fetching categories: {{ error }}
                     </div>
-                    <DataTable v-else :value="filteredUsers" :paginator="true" :rows="10">
-                        <Column field="first_name" header="First Name"></Column>
-                        <Column field="last_name" header="Last Name"></Column>
-                        <Column field="display_name" header="Display Name"></Column>
-                        <Column field="email" header="Email"></Column>
-                        <Column field="role" header="Role"></Column>
+                    <DataTable v-else :value="filteredCategories" :paginator="true" :rows="5">
+                        <Column field="id" header="ID"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="slug" header="Slug "></Column>
                         <Column field="status" header="Status"></Column>
+                        <Column field="parent_id" header="Parent Category"></Column>
                         <Column field="id" header="">
                             <template #body="slotProps">
-                                <i class="fas fa-edit mx-2 edit-icon" @click="editUser(slotProps.data.id)"></i>
-                                <i class="fas fa-trash-alt delete-icon" @click="confirmDelete(slotProps.data.id, slotProps.data.first_name, slotProps.data.last_name)"></i>
+                                <i class="fas fa-edit mx-2 edit-icon" @click="editCategory(slotProps.data.id)"></i>
+                                <i class="fas fa-trash-alt delete-icon" @click="confirmDelete(slotProps.data.id, slotProps.data.name)"></i>
                             </template>
                         </Column>
                     </DataTable>
@@ -148,6 +146,7 @@ import axios from 'axios';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import ProgressBar from 'primevue/progressbar';
+
 import { getToken } from '../../../src/helpers/tokenhelper';
 
 export default {
@@ -158,40 +157,39 @@ export default {
     },
     data() {
         return {
-            users: [],
+            categories: [],
             searchTerm: '',
             loading: false,
             error: null,
-            userStatistics: {}
+            categoryStatistics: {}
         };
     },
     computed: {
-        filteredUsers() {
+        filteredCategories() {
             if (this.searchTerm.trim() === '') {
-                return this.users;
+                return this.categories;
             }
             const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
-            return this.users.filter(user => 
-                user.first_name.toLowerCase().includes(lowerCaseSearchTerm) ||
-                user.last_name.toLowerCase().includes(lowerCaseSearchTerm) ||
-                user.display_name.toLowerCase().includes(lowerCaseSearchTerm)
+            return this.categories.filter(category => 
+                category.name.toLowerCase().includes(lowerCaseSearchTerm)
             );
-        },
+        },  
         token() {
             return getToken();
         }
     },
     methods: {
-        fetchUsers() {
+        fetchCategories() {
             this.loading = true;
             this.error = null;
-            axios.get('/api/users', {
+           
+            axios.get('/api/categories', {
                 headers: {
                     Authorization: `Bearer ${this.token}`
                 }
             })
                 .then(response => {
-                    this.users = response.data;
+                    this.categories = response.data;
                 })
                 .catch(error => {
                     this.error = error.message;
@@ -200,61 +198,61 @@ export default {
                     this.loading = false;
                 });
         },
-        editUser(id) {
-            this.$router.push(`/admin-panel/edit-user/${id}`);
+        editCategory(id) {
+            this.$router.push(`/admin-panel/edit-category/${id}`);
         },
-        confirmDelete(id, firstName, lastName) {
+        confirmDelete(id, name) {
             this.$swal({
                 title: 'Are you sure?',
-                text: `You want to delete ${firstName} ${lastName}!`,
+                text: `You want to delete category: ${name}!`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',
                 cancelButtonText: 'No, cancel!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.deleteUser(id);
+                    this.deleteCategory(id);
                 }
             });
         },
-        deleteUser(id) {
-            axios.delete(`/api/users/${id}`, {
+        deleteCategory(id) {
+            axios.delete(`/api/categories/${id}`, {
                 headers: {
                     Authorization: `Bearer ${this.token}`
                 }
             })
                 .then(response => {
-                    this.$swal('Deleted!', 'User has been deleted.', 'success');
-                    this.fetchUsers();
+                    this.$swal('Deleted!', 'Category has been deleted.', 'success');
+                    this.fetchCategories();
                 })
                 .catch(error => {
-                    console.error('Error deleting user:', error);
-                    this.$swal('Error!', 'Failed to delete user.', 'error');
+                    console.error('Error deleting category:', error);
+                    this.$swal('Error!', 'Failed to delete category.', 'error');
                 });
         },
-        fetchUserStatistics() {
-            axios.get('/api/user-statistics', {
+        fetchCategoryStatistics() {
+            axios.get('/api/category-statistics', {
                 headers: {
                     Authorization: `Bearer ${this.token}`
                 }
             })
                 .then(response => {
-                    this.userStatistics = response.data;
+                    this.categoryStatistics = response.data;
                 })
                 .catch(error => {
-                    console.error('Error fetching user statistics:', error);
+                    console.error('Error fetching category statistics:', error);
                 });
         }
     },
     mounted() {
-        this.fetchUsers();
-        this.fetchUserStatistics();
+        
+        this.fetchCategories();
+        this.fetchCategoryStatistics();
     }
 };
 </script>
 
-<style src=".../../resources/css/Adminpanel.css"  ></style>
-
+<style src=".../../resources/css/Adminpanel.css"></style>
 <style scoped>
 .edit-icon,
 .delete-icon {

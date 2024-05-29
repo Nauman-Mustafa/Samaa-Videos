@@ -24,7 +24,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-       VIDEOS
+       Sections
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -44,22 +44,22 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <!-- <li class="nav-item" :class="{ 'active': isUtilitiesActive }">
+    <li class="nav-item" :class="{ 'active': isUtilitiesActive }">
       <a class="nav-link collapsed d-flex justify-content-between align-items-center" @click="toggleUtilitiesCollapse" :aria-expanded="isUtilitiesCollapseExpanded.toString()" aria-controls="collapseUtilities">
-        <span>Utilities</span>
+        <span>Categories</span>
         <i class="fas fa-chevron-right fa-sm ml-2" :class="{ 'rotate-icon': isUtilitiesCollapseExpanded }"></i>
       </a>
       <div class="collapse" :class="{ 'show': isUtilitiesCollapseExpanded }" id="collapseUtilities" aria-labelledby="headingUtilities"
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Utilities:</h6>
-          <router-link to="/utilities-color" class="collapse-item">Colors</router-link>
-          <router-link to="/utilities-border" class="collapse-item">Borders</router-link>
-          <router-link to="/utilities-animation" class="collapse-item">Animations</router-link>
-          <router-link to="/utilities-other" class="collapse-item">Other</router-link>
+          <h6 class="collapse-header">Categories:</h6>
+          <router-link to="/admin-panel/add-category" class="collapse-item">Add Categories</router-link>
+          <router-link to="/admin-panel/category-list" class="collapse-item">Categories List</router-link>
+          <!-- <router-link to="/utilities-animation" class="collapse-item">Categories setting</router-link> -->
+          <!-- <router-link to="/utilities-other" class="collapse-item">Other</router-link> -->
         </div>
       </div>
-    </li> -->
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -80,7 +80,7 @@
           <!-- <h6 class="collapse-header">Login Screens:</h6> -->
           <router-link to="/admin-panel/add-user" class="collapse-item">Add Users</router-link>
 
-          <router-link to="/admin-panel/user-setting" class="collapse-item">User Setting</router-link>
+          <!-- <router-link to="/admin-panel/user-setting" class="collapse-item">User Setting</router-link> -->
 
           <router-link to="/admin-panel/user-list" class="collapse-item">User List</router-link>
           <!-- <router-link to="/forgot-password" class="collapse-item">Forgot Password</router-link>
@@ -102,10 +102,10 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-      <router-link to="/tables" class="nav-link">
+      <div @click="handleLogout" class="nav-link" style="cursor: pointer;">
         <i class="fas fa-fw fa-sign-out-alt"></i>
         <span>Log-Out</span>
-      </router-link>
+      </div>
     </li>
 
     <!-- Divider -->
@@ -122,7 +122,10 @@
 
 </template>
 <script>
+import { mapActions } from 'vuex';
+
 export default {
+
 data() {
   return {
     isComponentCollapseExpanded: false,
@@ -142,6 +145,8 @@ computed: {
   }
 },
 methods: {
+  ...mapActions(['logout']),
+
   toggleComponentCollapse() {
     this.isComponentCollapseExpanded = !this.isComponentCollapseExpanded;
   },
@@ -150,7 +155,16 @@ methods: {
   },
   togglePagesCollapse() {
     this.isPagesCollapseExpanded = !this.isPagesCollapseExpanded;
-  }
+  },
+
+  async handleLogout() {
+      try {
+        await this.logout();
+      
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    }
 }
 };
 </script>
