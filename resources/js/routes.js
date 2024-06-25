@@ -2,13 +2,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '../../src/store';
 import Home from '../views/pages/Home.vue';
+import HomePage from '../views/pages/MainPage.vue';
+
 import Dashboard from '../views/AdminPanel/homeDashboard.vue';
 import Login from '../views/AdminPanel/loginPage.vue';
 
 const routes = [
     {
         path: '/',
-        component: Home
+        component: Home,
+        children: [
+            {
+                path: '',
+                component: HomePage
+            },
+         
+        ]
     },
     {
         path: '/admin-panel/login',
