@@ -38,72 +38,10 @@
         <div class="sidebar-heading">Management</div>
 
         <!-- Inventory Section -->
-        <li class="nav-item" :class="{ active: isInventoryActive }">
-            <a
-                class="nav-link collapsed d-flex justify-content-between align-items-center"
-                @click="toggleInventoryCollapse"
-                :aria-expanded="isInventoryCollapseExpanded.toString()"
-                aria-controls="collapseInventory"
-            >
-                <span>Inventory</span>
-                <i
-                    class="fas fa-chevron-right fa-sm ml-2"
-                    :class="{ 'rotate-icon': isInventoryCollapseExpanded }"
-                ></i>
-            </a>
-            <div
-                class="collapse"
-                :class="{ show: isInventoryCollapseExpanded }"
-                id="collapseInventory"
-            >
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Asset Management:</h6>
-                    <router-link to="/add-asset" class="collapse-item"
-                        >Add Asset</router-link
-                    >
-                    <router-link to="/asset-list" class="collapse-item"
-                        >Asset List</router-link
-                    >
-                    <router-link to="/import-assets" class="collapse-item"
-                        >Import Assets</router-link
-                    >
-                    <router-link to="/organizations" class="collapse-item"
-                        >Organizations</router-link
-                    >
-                </div>
-            </div>
-        </li>
+     
 
         <!-- Categories Section -->
-        <li class="nav-item" :class="{ active: isUtilitiesActive }">
-            <a
-                class="nav-link collapsed d-flex justify-content-between align-items-center"
-                @click="toggleUtilitiesCollapse"
-                :aria-expanded="isUtilitiesCollapseExpanded.toString()"
-                aria-controls="collapseUtilities"
-            >
-                <span>Categories</span>
-                <i
-                    class="fas fa-chevron-right fa-sm ml-2"
-                    :class="{ 'rotate-icon': isUtilitiesCollapseExpanded }"
-                ></i>
-            </a>
-            <div
-                class="collapse"
-                :class="{ show: isUtilitiesCollapseExpanded }"
-                id="collapseUtilities"
-            >
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Categories:</h6>
-                    <router-link to="/add-category" class="collapse-item"
-                        >Add Categories</router-link
-                    >
-                    <router-link to="/category-list" class="collapse-item"
-                        >Categories List</router-link
-                    >
-                </div>
-            </div>
-        </li>
+      
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
