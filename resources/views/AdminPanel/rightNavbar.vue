@@ -1,171 +1,238 @@
 <template>
-       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <!-- Sidebar - Brand -->
-    <router-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
-      <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3">SAMAA VIDEOS <sup></sup></div>
-    </router-link>
+    <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+    >
+        <!-- Sidebar - Brand -->
+        <router-link
+            to="/"
+            class="sidebar-brand d-flex flex-column align-items-center justify-content-center py-4"
+        >
+            <div class="sidebar-brand-icon mb-1">
+                <img
+                    src="../../../public/images/sama-white.png"
+                    alt="SAMAA Logo"
+                    style="width: 100px; height: auto; margin-top: 20px"
+                />
+            </div>
+            <div class="sidebar-brand-text text-center">
+                <div class="font-weight-bold">Asset Management</div>
+            </div>
+        </router-link>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+        <!-- Divider -->
+        <hr class="sidebar-divider mt-4 mb-2" />
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item" :class="{ 'active': $route.path === '/' }">
-      <router-link to="/admin-panel" class="nav-link">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span>
-      </router-link>
-    </li>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item" :class="{ active: $route.path === '/' }">
+            <router-link to="/" class="nav-link">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </router-link>
+        </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-       Sections
-    </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">Management</div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item" :class="{ 'active': isComponentActive }">
-      <a class="nav-link collapsed d-flex justify-content-between align-items-center" @click="toggleComponentCollapse" :aria-expanded="isComponentCollapseExpanded.toString()" aria-controls="collapseTwo">
-        <span>Videos</span>
-        <i class="fas fa-chevron-right fa-sm ml-2" :class="{ 'rotate-icon': isComponentCollapseExpanded }"></i>
-      </a>
-      <div class="collapse" :class="{ 'show': isComponentCollapseExpanded }" id="collapseTwo" aria-labelledby="headingTwo"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Vidoes Section:</h6>
-          <router-link to="/admin-panel/add-videos" class="collapse-item">Add Videos</router-link>
-          <router-link to="/admin-panel/videos-list" class="collapse-item">Videos List</router-link>
-        </div>
-      </div>
-    </li>
+        <!-- Inventory Section -->
+        <li class="nav-item" :class="{ active: isInventoryActive }">
+            <a
+                class="nav-link collapsed d-flex justify-content-between align-items-center"
+                @click="toggleInventoryCollapse"
+                :aria-expanded="isInventoryCollapseExpanded.toString()"
+                aria-controls="collapseInventory"
+            >
+                <span>Inventory</span>
+                <i
+                    class="fas fa-chevron-right fa-sm ml-2"
+                    :class="{ 'rotate-icon': isInventoryCollapseExpanded }"
+                ></i>
+            </a>
+            <div
+                class="collapse"
+                :class="{ show: isInventoryCollapseExpanded }"
+                id="collapseInventory"
+            >
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Asset Management:</h6>
+                    <router-link to="/add-asset" class="collapse-item"
+                        >Add Asset</router-link
+                    >
+                    <router-link to="/asset-list" class="collapse-item"
+                        >Asset List</router-link
+                    >
+                    <router-link to="/import-assets" class="collapse-item"
+                        >Import Assets</router-link
+                    >
+                    <router-link to="/organizations" class="collapse-item"
+                        >Organizations</router-link
+                    >
+                </div>
+            </div>
+        </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item" :class="{ 'active': isUtilitiesActive }">
-      <a class="nav-link collapsed d-flex justify-content-between align-items-center" @click="toggleUtilitiesCollapse" :aria-expanded="isUtilitiesCollapseExpanded.toString()" aria-controls="collapseUtilities">
-        <span>Categories</span>
-        <i class="fas fa-chevron-right fa-sm ml-2" :class="{ 'rotate-icon': isUtilitiesCollapseExpanded }"></i>
-      </a>
-      <div class="collapse" :class="{ 'show': isUtilitiesCollapseExpanded }" id="collapseUtilities" aria-labelledby="headingUtilities"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Categories:</h6>
-          <router-link to="/admin-panel/add-category" class="collapse-item">Add Categories</router-link>
-          <router-link to="/admin-panel/category-list" class="collapse-item">Categories List</router-link>
-          <!-- <router-link to="/utilities-animation" class="collapse-item">Categories setting</router-link> -->
-          <!-- <router-link to="/utilities-other" class="collapse-item">Other</router-link> -->
-        </div>
-      </div>
-    </li>
+        <!-- Categories Section -->
+        <li class="nav-item" :class="{ active: isUtilitiesActive }">
+            <a
+                class="nav-link collapsed d-flex justify-content-between align-items-center"
+                @click="toggleUtilitiesCollapse"
+                :aria-expanded="isUtilitiesCollapseExpanded.toString()"
+                aria-controls="collapseUtilities"
+            >
+                <span>Categories</span>
+                <i
+                    class="fas fa-chevron-right fa-sm ml-2"
+                    :class="{ 'rotate-icon': isUtilitiesCollapseExpanded }"
+                ></i>
+            </a>
+            <div
+                class="collapse"
+                :class="{ show: isUtilitiesCollapseExpanded }"
+                id="collapseUtilities"
+            >
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Categories:</h6>
+                    <router-link to="/add-category" class="collapse-item"
+                        >Add Categories</router-link
+                    >
+                    <router-link to="/category-list" class="collapse-item"
+                        >Categories List</router-link
+                    >
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <!-- Heading -->
+        <div class="sidebar-heading">Settings</div>
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Settings
-    </div>
+        <!-- Users Section -->
+        <li class="nav-item" :class="{ active: isPagesActive }">
+            <a
+                class="nav-link collapsed d-flex justify-content-between align-items-center"
+                @click="togglePagesCollapse"
+                :aria-expanded="isPagesCollapseExpanded.toString()"
+                aria-controls="collapsePages"
+            >
+                <span>Users</span>
+                <i
+                    class="fas fa-chevron-right fa-sm ml-2"
+                    :class="{ 'rotate-icon': isPagesCollapseExpanded }"
+                ></i>
+            </a>
+            <div
+                class="collapse"
+                :class="{ show: isPagesCollapseExpanded }"
+                id="collapsePages"
+            >
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <router-link to="/add-user" class="collapse-item"
+                        >Add Users</router-link
+                    >
+                    <router-link to="/user-list" class="collapse-item"
+                        >User List</router-link
+                    >
+                </div>
+            </div>
+        </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item" :class="{ 'active': isPagesActive }">
-      <a class="nav-link collapsed d-flex justify-content-between align-items-center" @click="togglePagesCollapse" :aria-expanded="isPagesCollapseExpanded.toString()" aria-controls="collapsePages">
-        <span>Users</span>
-        <i class="fas fa-chevron-right fa-sm ml-2" :class="{ 'rotate-icon': isPagesCollapseExpanded }"></i>
-      </a>
-      <div class="collapse" :class="{ 'show': isPagesCollapseExpanded }" id="collapsePages" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-          <router-link to="/admin-panel/add-user" class="collapse-item">Add Users</router-link>
+        <!-- Search -->
+        <li class="nav-item">
+            <router-link to="/search" class="nav-link">
+                <i class="fas fa-fw fa-search"></i>
+                <span>Search</span>
+            </router-link>
+        </li>
 
-          <!-- <router-link to="/admin-panel/user-setting" class="collapse-item">User Setting</router-link> -->
+        <!-- Logout -->
+        <li class="nav-item">
+            <div @click="handleLogout" class="nav-link" style="cursor: pointer">
+                <i class="fas fa-fw fa-sign-out-alt"></i>
+                <span>Log-Out</span>
+            </div>
+        </li>
 
-          <router-link to="/admin-panel/user-list" class="collapse-item">User List</router-link>
-          <!-- <router-link to="/forgot-password" class="collapse-item">Forgot Password</router-link>
-          <div class="collapse-divider"></div>
-          <h6 class="collapse-header">Other Pages:</h6>
-          <router-link to="/404" class="collapse-item">404 Page</router-link>
-          <router-link to="/blank" class="collapse-item">Blank Page</router-link> -->
-        </div>
-      </div>
-    </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-      <router-link to="/admin-panel/search" class="nav-link">
-        <i class="fas fa-fw fa-search"></i>
-        <span>Search</span>
-      </router-link>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-      <div @click="handleLogout" class="nav-link" style="cursor: pointer;">
-        <i class="fas fa-fw fa-sign-out-alt"></i>
-        <span>Log-Out</span>
-      </div>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <!-- <div class="text-center d-none d-md-inline">
+        <!-- Sidebar Toggler (Sidebar) -->
+        <!-- <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div> -->
 
-    <!-- Sidebar Message -->
-  
-  </ul>
-
+        <!-- Sidebar Message -->
+    </ul>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
-
-data() {
-  return {
-    isComponentCollapseExpanded: false,
-    isUtilitiesCollapseExpanded: false,
-    isPagesCollapseExpanded: false,
-  };
-},
-computed: {
-  isComponentActive() {
-    return this.$route.path === '/buttons' || this.$route.path === '/cards';
-  },
-  isUtilitiesActive() {
-    return this.$route.path === '/utilities-color' || this.$route.path === '/utilities-border' || this.$route.path === '/utilities-animation' || this.$route.path === '/utilities-other';
-  },
-  isPagesActive() {
-    return this.$route.path === '/login' || this.$route.path === '/register' || this.$route.path === '/forgot-password' || this.$route.path === '/404' || this.$route.path === '/blank';
-  }
-},
-methods: {
-  ...mapActions(['logout']),
-
-  toggleComponentCollapse() {
-    this.isComponentCollapseExpanded = !this.isComponentCollapseExpanded;
-  },
-  toggleUtilitiesCollapse() {
-    this.isUtilitiesCollapseExpanded = !this.isUtilitiesCollapseExpanded;
-  },
-  togglePagesCollapse() {
-    this.isPagesCollapseExpanded = !this.isPagesCollapseExpanded;
-  },
-
-  async handleLogout() {
-      try {
-        await this.logout();
-      
-      } catch (error) {
-        console.error('Logout failed:', error);
-      }
-    }
-}
+    data() {
+        return {
+            isUtilitiesCollapseExpanded: false,
+            isPagesCollapseExpanded: false,
+            isInventoryCollapseExpanded: false,
+        };
+    },
+    computed: {
+        isUtilitiesActive() {
+            return this.$route.path.includes("/category");
+        },
+        isPagesActive() {
+            return this.$route.path.includes("/user");
+        },
+        isInventoryActive() {
+            return (
+                this.$route.path.includes("/asset") ||
+                this.$route.path === "/organizations"
+            );
+        },
+    },
+    methods: {
+        ...mapActions(["logout"]),
+        toggleUtilitiesCollapse() {
+            this.isUtilitiesCollapseExpanded =
+                !this.isUtilitiesCollapseExpanded;
+        },
+        togglePagesCollapse() {
+            this.isPagesCollapseExpanded = !this.isPagesCollapseExpanded;
+        },
+        toggleInventoryCollapse() {
+            this.isInventoryCollapseExpanded =
+                !this.isInventoryCollapseExpanded;
+        },
+        async handleLogout() {
+            try {
+                await this.logout();
+                this.$router.push("/login");
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
+        },
+    },
 };
 </script>
 
+<style scoped>
+.rotate-icon {
+    transform: rotate(90deg);
+    transition: transform 0.3s;
+}
+
+/* Add these styles */
+#accordionSidebar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure dropdown menus stay within viewport */
+.collapse-inner {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+</style>

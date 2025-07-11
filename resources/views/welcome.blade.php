@@ -8,13 +8,15 @@
     <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    <!-- Add this before your app.css -->
+    <link href="{{ asset('css/AdminPanel.css') }}" rel="stylesheet">
     <title>SAMAA VIDEOS</title>
     @vite('resources/css/app.css')
 </head>
 <body>
     <div id="app"></div>
     @vite('resources/js/app.js')
-    
+
     <!-- Include jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

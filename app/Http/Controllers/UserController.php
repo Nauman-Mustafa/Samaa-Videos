@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         try {
             $user = User::create($request->all());
-            
+
             return response()->json($user, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error creating user', 'error' => $e->getMessage()], 500);
@@ -63,7 +63,7 @@ class UserController extends Controller
         $totalUsers = User::count();
         $activeUsers = User::where('status', 'active')->count();
         $deletedUsers = User::where('status', 'Deleted')->count();
-       
+
         $blockedUsers = User::where('status', 'blocked')->count();
 
         return response()->json([
@@ -88,6 +88,16 @@ class UserController extends Controller
             return response()->json(['token' => $token, 'user' => $user], 200);
         } else {
             return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+    }
+
+    public function getCurrentUser(Request $request)
+    {
+        try {
+            $user = $request->user();
+            return response()->json($user);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error retrieving current user', 'error' => $e->getMessage()], 500);
         }
     }
 }

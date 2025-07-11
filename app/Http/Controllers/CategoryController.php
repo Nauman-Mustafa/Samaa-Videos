@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -85,6 +86,76 @@ class CategoryController extends Controller
             ]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error retrieving category statistics', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getMajorCategories()
+    {
+        try {
+            Log::info('Fetching major categories');
+
+            $categories = Category::whereNull('parent_id')
+                ->where('status', '1')
+                ->select('id', 'name')
+                ->get()
+                ->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'name' => $category->name
+                    ];
+                });
+
+            Log::info('Major categories fetched', [
+                'count' => $categories->count(),
+                'categories' => $categories->toArray()
+            ]);
+
+            return response()->json($categories);
+        } catch (\Exception $e) {
+            Log::error('Error fetching major categories', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json([
+                'message' => 'Error retrieving major categories',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getMinorCategories($parentId)
+    {
+        try {
+            Log::info('Fetching minor categories', ['parent_id' => $parentId]);
+
+            $categories = Category::where('parent_id', $parentId)
+                ->where('status', '1')
+                ->select('id', 'name')
+                ->get()
+                ->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'name' => $category->name
+                    ];
+                });
+
+            Log::info('Minor categories fetched', [
+                'parent_id' => $parentId,
+                'count' => $categories->count(),
+                'categories' => $categories->toArray()
+            ]);
+
+            return response()->json($categories);
+        } catch (\Exception $e) {
+            Log::error('Error fetching minor categories', [
+                'parent_id' => $parentId,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json([
+                'message' => 'Error retrieving minor categories',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

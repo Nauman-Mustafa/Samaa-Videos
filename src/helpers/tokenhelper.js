@@ -1,6 +1,6 @@
 // tokenHelper.js
-import { useStore } from 'vuex';
+import store from "../store"; // Adjust this path based on your store location
 
 export function getToken() {
-  return useStore().state.token;
+    return store.state.token;
 }

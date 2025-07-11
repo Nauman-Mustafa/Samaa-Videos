@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'status', 'parent_id'];
+    protected $fillable = ['name', 'status', 'parent_id'];
 
     public function parent()
     {
@@ -19,5 +19,15 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function majorAssets()
+    {
+        return $this->hasMany(Asset::class, 'major_category_id');
+    }
+
+    public function minorAssets()
+    {
+        return $this->hasMany(Asset::class, 'minor_category_id');
     }
 }
